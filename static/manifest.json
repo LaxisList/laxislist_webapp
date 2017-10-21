@@ -1,0 +1,20 @@
+{
+  "name": "LaxisList",
+  "short_name": "LaxisList",
+  "icons": [
+    {
+      "src": "https://firebasestorage.googleapis.com/v0/b/laxislist.appspot.com/o/statics%2Fandroid-chrome-192x192-min.png?alt=media&token=bc58241e-b045-4b6e-86fb-25065315322a",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://firebasestorage.googleapis.com/v0/b/laxislist.appspot.com/o/statics%2Fandroid-chrome-512x512-min.png?alt=media&token=16afe319-199c-48da-b98c-89a491d93376",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#FFFFFF"
+}
