@@ -11,6 +11,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 var loadMinified = require('./load-minified')
+var PrerenderSpaPlugin = require('prerender-spa-plugin')
 
 var env = config.build.env
 
@@ -49,20 +50,6 @@ var webpackConfig = merge(baseWebpackConfig, {
         safe: true
       }
     }),
-    // momentjs
-    // new webpack.ContextReplacementPlugin(/^\.\/locale$/, context => {
-    //   // check if the context was created inside the moment package
-    //   if (!/\/moment\//.test(context.context)) { return }
-    //   // context needs to be modified in place
-    //   Object.assign(context, {
-    //     // include only japanese, korean and chinese variants
-    //     // all tests are prefixed with './' so this must be part of the regExp
-    //     // the default regExp includes everything; /^$/ could be used to include nothing
-    //     regExp: /^\.\/(ja|ko|zh|fr|es|pt)/,
-    //       // point to the locale data folder relative to moment/src/lib/locale
-    //     request: '../../locale'
-    //   })
-    // }),
     // generate dist index.html with correct asset hash for caching.
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
@@ -110,6 +97,12 @@ var webpackConfig = merge(baseWebpackConfig, {
         ignore: ['.*']
       }
     ]),
+    new PrerenderSpaPlugin(
+      // Path to compiled app
+      path.join(__dirname, '../dist'),
+      // List of endpoints you wish to prerender
+      [ '/', '/post/create', '/contact-us', '/terms-and-conditions', '/signup', '/signin']
+    ),
     // service worker caching
     new SWPrecacheWebpackPlugin({
       cacheId: 'my-vue-app',

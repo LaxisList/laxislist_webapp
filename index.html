@@ -48,7 +48,10 @@
 
     <!--  -->
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+    <!-- bootstrap v.b2 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
     <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
     <script src="https://use.fontawesome.com/c7735c3551.js"></script>
     <link rel="icon" type="image/png" sizes="32x32" href="https://firebasestorage.googleapis.com/v0/b/laxislist.appspot.com/o/statics%2Ffavicon-32x32-min.png?alt=media&token=b3edea56-24a6-4d2a-9f27-70ebb8ba553f">
@@ -75,7 +78,7 @@
   <style>
     .loading {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
@@ -84,11 +87,11 @@
       font-size: 16px;
     }
     #loader1{
-	    border: 8px solid #f3f3f3; /* Light grey */
-	    border-top: 8px solid #3498db; /* Blue */
+	    border: 6px solid #f3f3f3; /* Light grey */
+	    border-top: 6px solid #333; /* Blue */
 	    border-radius: 50%;
-	    width: 80px;
-	    height: 80px;
+	    width: 60px;
+	    height: 60px;
 	    animation: spin 1s linear infinite;
 	  }
     @keyframes spin {
@@ -100,11 +103,19 @@
     <noscript>
       This is your fallback content in case JavaScript fails to load.
     </noscript>
-    <div id="app"><div class="loading"><span id="loader1"></span></div></div>
-    <!-- <div id="app"><div class="loading"><i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="font-size: 90px; color: blue;"></i></div></div> -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <div id="app">
+      <div class="loading">
+        <span id="loader1"></span>
+        <p style="padding-top: 20px;">Chargement...</p>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+            integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+            integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     <!-- Todo: only include in production -->
     <%= htmlWebpackPlugin.options.serviceWorkerLoader %>
     <!-- built files will be auto injected -->
