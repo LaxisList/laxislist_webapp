@@ -50,7 +50,6 @@ import Contact from '@/components/Statics/Contact'
 import Terms from '@/components/Statics/Terms'
 
 
-
 Vue.use(Router)
 
 export default new Router({

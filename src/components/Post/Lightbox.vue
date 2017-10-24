@@ -28,7 +28,7 @@ export default {
   data () {
     return {
       selectedImage: '',
-      index: 0,
+      index: 0
     }
   },
   computed: {
@@ -44,18 +44,16 @@ export default {
       return this.selectedImage = selectedImage
     },
     previous () {
-      // for (let i = 0; i < this.imageURLsCount; i--) {
-      //   this.selectedImage = this.imageURLs[i]
-      // }
+      this.selectedImage = this.imageURLs[this.index--]
+      if(this.index < 0) this.index = this.imageURLsCount - 1
     },
     next () {
-      // for (let i = 0; i < this.imageURLsCount; i++) {
-      //   this.selectedImage = this.imageURLs[i]
-      // }
+      this.selectedImage = this.imageURLs[this.index++]
+      if(this.index >= this.imageURLsCount) this.index = 0
     }
   },
   created () {
-    this.selectedImage = this.imageURLs[0]
+    this.selectedImage = this.imageURLs[this.index]
   }
 }
 </script>
