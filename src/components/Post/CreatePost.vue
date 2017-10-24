@@ -4,7 +4,7 @@
       <div class="col-md-3 hidden-sm-down"></div>
       <div class="col-md-6">
         <h4 class="mb-4 mt-3">
-          Postez votre publication
+          Postez votre article
         </h4>
         <div v-if="errorMessage" class="mb-2">
           <app-alert :alert="errorMessage"/>
@@ -51,45 +51,23 @@
             </div>
           </div>
 
-          <!-- categories -->
-          <!-- <div class="form-group d-flex flex-row align-items-center">
-            <h6 class="mr-2">Sélectionner les categories:</h6>
-            <div class="btn-group">
-            <button type="button" class="btn btn_outline dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Categories
-            </button>
-            <div class="dropdown-menu dropdown-menu-right">
-              <div class="dropdown-item" v-for="i in 20" :key="i">
-                <label class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input">
-                  <span class="custom-control-indicator"></span>
-                  <span class="custom-control-description">Hotel</span>
-                </label>
-              </div>
-              <span class="p-3">Ajouter catégorie</span>
-            </div>
-          </div>
-          </div> -->
-
-
-
           <div class="form-group">
             <textarea name="name" class="form-control" v-model.trim="description" placeholder="Description" rows="3" cols="20" required></textarea>
             <small class="text-danger mt-2">
-              <i class="fa fa-exclamation-circle mr-1" aria-hidden="true"></i> Maximum 160 characterès.
+              <i class="fa fa-exclamation-circle mr-1" aria-hidden="true"></i> (Obligatoire) L'essentiel sur votre article. Maximum 160 charactères!
             </small>
           </div>
 
           <div class="form-group">
             <textarea name="name" class="form-control" v-model.trim="details" placeholder="Détails" rows="8" cols="40"></textarea>
             <small class="text-danger mt-2">
-              <i class="fa fa-exclamation-circle mr-1" aria-hidden="true"></i> Expliquez votre produit, votre annonce ou ce que vous vendez en détail.
+              <i class="fa fa-exclamation-circle mr-1" aria-hidden="true"></i>(Facultatif) Expliquez votre article en détail!
             </small>
           </div>
 
           <div class="form-group mt-4 mb-2">
             <h6 class="mr-2"><b>Ajouter des images</b></h6>
-            <small class="text-danger"><i class="fa fa-exclamation-circle mr-1" aria-hidden="true"></i> Maximum 10 images</small>
+            <small class="text-danger"><i class="fa fa-exclamation-circle mr-1" aria-hidden="true"></i> Pas plus de 10 images!</small>
             <div class="d-flex align-items-center flex-column">
               <input type="file"
                         style="display: none;"
@@ -229,7 +207,7 @@ export default {
         })
         this.images.push(files[0])
      },
-  }, 
+  },
   created () {
     window.scrollTo(0, 0)
   }

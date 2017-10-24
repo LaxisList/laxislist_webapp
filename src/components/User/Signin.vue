@@ -104,6 +104,9 @@ export default {
   },
   mounted () {
     this.$store.dispatch('clearError')
+  },
+  created () {
+    window.scrollTo(0, 0)
   }
 }
 </script>

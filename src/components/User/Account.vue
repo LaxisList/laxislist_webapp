@@ -1,8 +1,11 @@
 <template lang="html">
-  <div class="container pt-4">
+  <div class="container pt-2">
     <div class="row d-flex justify-content-center">
-      <div class="col-sm-9 col-md-9">
-        <h5 style="font-weight: 300;" class="mb-4"><b>Mes informations personnelles</b></h5>
+      <div class="col-sm-10 col-md-9">
+        <div class="d-flex flex-row justify-content-between align-items-center mb-3">
+          <h5 style="font-weight: 300;"><b>Mes informations personnelles</b></h5>
+          <router-link tag="button" :to="`/user/edit/${user.id}`" class="btn btn__normal">Modifier</router-link>
+        </div>
         <ul class="list-group">
           <li class="list-group-item">
             <span>Nom de famille:</span>
@@ -35,12 +38,8 @@
           <li class="list-group-item">
             <span>Photo de profil:</span>
             <span>
-                <img :src="user.avatar" class="img-thumbnail" alt="avatar" height="50px" width="50px" style="border-radius: 50%;">
+                <img :src="user.avatar" alt="avatar" height="70px" width="70px" style="border-radius: 50%;">
             </span>
-          </li>
-          <li class="list-group-item">
-            <span>ID:</span>
-            <span>{{user.id}}</span>
           </li>
         </ul>
       </div>

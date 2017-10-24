@@ -24,6 +24,11 @@ const Account = resolve => {
     resolve(require('@/components/User/Account.vue'))
   }, 'account')
 }
+const EditAccount = resolve => {
+  require.ensure(['@/components/User/EditAccount.vue'], () => {
+    resolve(require('@/components/User/EditAccount.vue'))
+  }, 'edit-account')
+}
 // user's messages
 const Messages = resolve => {
   require.ensure(['@/components/User/Messages.vue'], () => {
@@ -53,13 +58,13 @@ export default new Router({
     {
       path: '/',
       component: Home,
-      meta: { title: 'Accueil' }
+      meta: { title: 'Achetez tout à moins cher en comparant les prix. Vendez à votre tour.' }
     },
     {
-      path: '/post/new',
+      path: '/post/create',
       component: CreatePost,
       beforeEnter: AuthGuard,
-      meta: { title: 'Poster annonce' }
+      meta: { title: 'Postez votre article' }
     },
     {
       path: '/posts/:id',
@@ -74,17 +79,23 @@ export default new Router({
     {
       path: '/signin',
       component: Signin,
-      meta: { title: 'Se connecter' }
+      meta: { title: 'Connexion' }
     },
     {
       path: '/signup',
       component: Signup,
-      meta: { title: 'S\'inscrire' }
+      meta: { title: 'Inscription' }
     },
     {
       path: '/user/account/:id',
       component: Account,
       meta: { title: 'Mon compte' },
+      beforeEnter: AuthGuard
+    },
+    {
+      path: '/user/edit/:id',
+      component: EditAccount,
+      meta: { title: 'Modifier mon compte' },
       beforeEnter: AuthGuard
     },
     {

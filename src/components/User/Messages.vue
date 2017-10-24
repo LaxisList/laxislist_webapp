@@ -6,9 +6,9 @@
         <div class="list-group" v-if="messages.length > 0">
           <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" v-for="message in messages">
             <div class="d-flex w-100 justify-content-between">
-              <div class="d-flex flex-row">
+              <div class="d-flex flex-row align-items-center">
                 <img :src="message.creatorAvatar" alt="" height="30px" width="30px" style="border-radius: 100%" class="mr-2">
-                <h6 class="mb-1"><b>{{message.creatorName}} ({{message.creatorPhoneNumber}})</b></h6>
+                <h6 class="mb-1"><b>{{message.creatorName}}</b></h6>
               </div>
               <small>{{message.timestamp | date}}</small>
             </div>

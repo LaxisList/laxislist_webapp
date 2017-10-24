@@ -5,9 +5,9 @@
         <div class="mb-3 d-flex align-items-center" @click="$router.back()" style="cursor: pointer;">
           <i class="material-icons mr-1">navigate_before</i>Retour
         </div>
-        <div class="__header mb-2 d-flex flex-row justify-content-between">
-          <h5 class="post__title">{{post.title}}</h5>
-          <!-- <button type="button" name="button" class="btn btn-outline-danger"><b>Partager</b> </button> -->
+        <div class="__header mb-2 d-flex flex-row justify-content-between align-items-center">
+          <h5 class="post__title">{{postTitle}}</h5>
+          <!-- <button type="button" name="button" @click.prevent="shareOnFacebook" class="btn">Partagez sur Facebook</button> -->
         </div>
 
         <app-lightbox :post="post"/>
@@ -25,8 +25,8 @@
           <div class="__host d-flex flex-column mb-4 mt-4">
             <div class="d-flex align-items-center">
               <img :src="post.creatorAvatar" alt="" class="avatar mr-3" v-if="post.creatorAvatar">
-              <div v-if="post.creatorBusine"><b>Hôte: {{post.creatorBusine}}</b></div>
-              <div v-else="!post.creatorBusine"><b>Hôte: {{post.creatorName}}</b></div>
+              <!-- <div v-if="post.creatorBusiness"><b>Hôte: {{post.creatorBusiness}}</b></div> -->
+              <div><b>Hôte: {{post.creatorName}}</b></div>
             </div>
             <div class="d-flex flex-row mt-3">
               <button class="btn btn__normal mr-3" @click="callCreator = !callCreator">{{ callCreator !== true ? 'Voir numéro' : post.creatorPhoneNumber}}</button>
@@ -63,6 +63,9 @@ export default {
     post () {
       return this.$store.getters.loadedSinglePost(this.id)
     },
+    postTitle () {
+      return _.capitalize(this.post.title);
+    },
     user () {
       return this.$store.getters.user
     },
@@ -82,13 +85,34 @@ export default {
        }else{
          this.$store.dispatch('saveWish', this.id)
        }
+     },
+     shareOnTwitter () {
+       let postUrl = `https://www.laxislist.com/posts/${this.post.id}`
+       let shareUrl = `https://twitter.com/intent/tweet?text="${encodeURIComponent(this.post.title)}"&via=LaxisList&url="${encodeURIComponent(postUrl)}"`
+
+       this.popupCenter(shareUrl, `Partagez sur Twitter`)
+     },
+     shareOnFacebook () {
+       let postUrl = `https://www.laxislist.com/posts/${this.post.id}`
+       let shareUrl = `https://wwww.facebook.com/sharer/sharer.php?u="${postUrl}"`
+       this.popupCenter(shareUrl, `Partagez sur Facebook`)
+     },
+     popupCenter (url, title, width, height) {
+       let popupWidth = width || 640
+       let popupHeight = height || 320
+       let left = window.screenLeft || window.screenX
+       let top = window.screenTop || window.screenY
+       let windowWidth = window.innerWidth || document.documentElement.clientWidth
+       let windowHeight = window.innerHeight || document.documentElement.clientHeight
+       let popupLeft = left + windowWidth / 2 - popupWidth / 2
+       let popupTop = top + windowHeight / 2 - popupHeight / 2
+
+       return window.open(url, title, `scrollbars=yes, width=${popupWidth}, height=${popupHeight}, top=${popupTop}, left=${popupLeft}`)
      }
   },
   components: {
     AppLightbox,
     AppSendMessage
-  },
-  methods: {
   },
   created () {
     window.scrollTo(0, 0)
@@ -97,9 +121,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.post__title {
-  text-transform: capitalize;
-}
 .avatar{
   width: 40px;
   height: 40px;

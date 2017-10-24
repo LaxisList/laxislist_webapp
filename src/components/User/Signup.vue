@@ -112,8 +112,10 @@
 </template>
 
 <script>
+import { photoPicker } from './PhotoPicker'
 
 export default {
+  mixins: [photoPicker],
   data () {
     return {
       email: '',
@@ -154,7 +156,7 @@ export default {
     }
   },
   watch: {
-    user (value) { // user's computed property gets back a value
+    user (value) {
       if (value !== null && value !== undefined) {
         this.goToUserProfile = true
       }
@@ -168,48 +170,29 @@ export default {
       this.$store.dispatch('signInWithGoogle')
     },
     onUserProfile () {
-            if(!this.firstname || !this.phoneNumber || !this.selectedGender) return
-            // if (this.image === null) {
-            //     return alert('Vous devez ajouter votre photo de profil')
-            // }
-            const newUser = {
-                lastname: this.lastname,
-                firstname: this.firstname,
-                phoneNumber: this.phoneNumber,
-                business: this.business,
-                gender: this.gender,
-                image: this.image === null ? this.image = 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png' : this.image,
-                email: this.email
-            }
-            this.$store.dispatch('setUserProfile', newUser)
-            this.$router.push({path: '/', query: { alert: `Votre compte a été créé. Vous êtes connecté comme ${this.firstname}.`} })
-        },
-        onSignup () {
-            if (this.password !== this.confirmPassword) return
-            this.$store.dispatch('signUserUp', {email: this.email, password: this.password})
-        },
-        onPickFile () {
-            this.$refs.fileInput.click()
-        },
-        onFilePicked (e) {
-            const files = e.target.files
-            let filename = files[0].name
-            if (files[0].size / 1024 > 1024) {
-                return alert('La photo téléchargée est trop grande. Veuillez réessayez avec une photo de petite taille, maximum 1MB.')
-            }
-            if (filename.lastIndexOf('.') <= 0) {
-                return alert('Photo invalide. Veuillez réessayez avec une autre photo.')
-            }
-        const fileReader = new FileReader()
-            fileReader.readAsDataURL(files[0])
-            fileReader.addEventListener('load', () => {
-            this.imageUrl = fileReader.result
-            })
-            this.image = files[0]
-      }
+        if(!this.firstname || !this.phoneNumber || !this.selectedGender) return
+        const newUser = {
+            lastname: this.lastname,
+            firstname: this.firstname,
+            phoneNumber: this.phoneNumber,
+            business: this.business,
+            gender: this.gender,
+            image: this.image !== null ? this.image : 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png',
+            email: this.email
+        }
+        this.$store.dispatch('setUserProfile', newUser)
+        this.$router.push({path: '/', query: { alert: `Votre compte a été créé. Vous êtes connecté comme ${this.firstname}.`} })
+    },
+    onSignup () {
+        if (this.password !== this.confirmPassword) return
+        this.$store.dispatch('signUserUp', {email: this.email, password: this.password})
+    },
   },
   mounted () {
     this.$store.dispatch('clearError')
+  },
+  created () {
+    window.scrollTo(0, 0)
   }
 }
 </script>

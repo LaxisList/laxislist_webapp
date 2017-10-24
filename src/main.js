@@ -31,7 +31,7 @@ Vue.config.productionTip = false
 
 // router
 router.beforeEach((to, from, next) => {
-  document.title = to.meta.title !== undefined ? 'LaxisList | ' + to.meta.title : 'LaxisList'
+  document.title = to.meta.title !== undefined ? 'LaxisList - ' + to.meta.title : 'LaxisList'
   next()
 })
 

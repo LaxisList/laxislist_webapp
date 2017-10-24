@@ -13,13 +13,13 @@
         <div class="">
           <ul class="list-inline">
             <li class="list-inline-item">
-              <a href="https://web.facebook.com/LaxisList-318112358664626/" target="_blank"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
+              <a href="https://fb.me/LaxisList" target="_blank"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
             </li>
             <li class="list-inline-item">
               <a href="#" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
             </li>
             <li class="list-inline-item">
-              <a href="#" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+              <a href="https://twitter.com/LaxisList" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
             </li>
           </ul>
         </div>

@@ -7,13 +7,8 @@
         <div class="__price">
           <b>{{post.price}}{{post.currency | currency}}</b>
         </div>
-        <!-- <div class="__wish">
-          <i :class="{active: postInWish}"
-             class="fa fa-heart"
-             aria-hidden="true"></i>
-        </div> -->
-        <!-- <div class="previous" @click="previous"><i class="__chevron __chevron_left material-icons">chevron_left</i></div>
-        <div class="next" @click="next"><i class="__chevron __chevron_right material-icons">chevron_right</i></div> -->
+        <div class="previous" @click="previous"><i class="__chevron __chevron_left material-icons">chevron_left</i></div>
+        <div class="next" @click="next"><i class="__chevron __chevron_right material-icons">chevron_right</i></div>
       </div>
     </div>
     <div class="row">
@@ -37,7 +32,7 @@ export default {
     }
   },
   computed: {
-    slideCount () {
+    imageURLsCount () {
       return this.imageURLs.length
     },
     imageURLs () {
@@ -47,31 +42,20 @@ export default {
   methods: {
     imageSelected (selectedImage) {
       return this.selectedImage = selectedImage
+    },
+    previous () {
+      // for (let i = 0; i < this.imageURLsCount; i--) {
+      //   this.selectedImage = this.imageURLs[i]
+      // }
+    },
+    next () {
+      // for (let i = 0; i < this.imageURLsCount; i++) {
+      //   this.selectedImage = this.imageURLs[i]
+      // }
     }
-    // next () {
-    //   // this.selectedImage = this.imageURLs[this.index++]
-    //   // if(this.selectedImage >= this.slidesCount) {
-    //   //   this.selectedImage = 0
-    //   // }
-    //   // console.log(this.selectedImage);
-    //   this.selectedImage = this.imageURLs[this.index++]
-    //   // console.log(this.selectedImage);
-    // },
-    // previous () {
-    //   // this.selectedImage = this.imageURLs[this.index--]
-    //   // if(this.selectedImage < 0) {
-    //   //   this.selectedImage = this.slidesCount - 1
-    //   // }
-    //   // console.log(this.selectedImage);
-    //   this.selectedImage = this.imageURLs[this.index--]
-    //   // console.log(this.selectedImage);
-    // },
   },
   created () {
     this.selectedImage = this.imageURLs[0]
-    // this.imageURLs.forEach((image, i) => {
-    //   this.index = i
-    // })
   }
 }
 </script>

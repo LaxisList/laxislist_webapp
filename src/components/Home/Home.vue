@@ -7,10 +7,17 @@
     <!-- search bar -->
     <div class="row">
       <div class="col-sm-12 ">
-        <div class="form-inline searchbar">
-          <input type="text" v-model.trim="query" placeholder="Qu'est-ce que vous recherchez?" class="form-control input_searchbar" @keyup.enter.prevent="foundPost">
-          <!-- <button class="btn btn-danger btn_search my-2 my-sm-0 ml-md-2" type="submit" style="cursor: pointer;">Effacer</button> -->
-          <button class="btn btn__normal btn_search my-2 ml-md-2" type="button" @click.prevent="foundPost">Trouver</button>
+        <div class="flex xs12">
+          <div class="d-flex flex-row align-items-center search__bar">
+            <i aria-hidden="true"
+               class="material-icons __icon_search icon input-group__prepend-icon"
+               @click.prevent="foundPost">search</i>
+            <input tabindex="0"
+                   v-model.trim="query"
+                   placeholder="Qu'est-ce que vous recherchez?"
+                   type="search"
+                   @keyup.enter.prevent="foundPost">
+          </div>
         </div>
       </div>
     </div>
@@ -22,26 +29,9 @@
     </div>
     <!-- result grid and filter -->
     <div class="row mt-5 mb-5">
-      <!-- filter -->
-      <!-- <div class="col-md-3 col-sm-0 col-xs-0">
-        <div class="card p-3">
-          <div class="card-block">
-            <div class="card-title">
-              <h5 class="d-flex align-items-center"><i class="material-icons mr-2">filter_list</i> Filter par</h5>
-            </div>
-            <div class="priceRange">
-              Prix maximum: <input type="number" v-model.trim="priceRange" class="form-control mt-1" style="width: 90px;">
-            </div>
-          </div>
-        </div>
-      </div> -->
-      <!-- results -->
-      <!-- <div class="col-sm-12 col-md-6" v-for="post in filteredPosts(query, selectedCategory, priceRange, loadedPosts)" :key="post.id"> -->
-      <!-- <div class="row" v-if="loading"> -->
-        <div class="col-sm-12 d-flex justify-content-center" v-if="loading">
-          <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="font-size: 52px;"></i>
-        </div>
-      <!-- </div> -->
+      <div class="col-sm-12 d-flex justify-content-center" v-if="loading">
+        <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="font-size: 52px;"></i>
+      </div>
       <div class="col-sm-12 col-md-9" v-else>
         <div class="row">
           <div class="col-sm-6 col-md-4 mb-4" v-for="post in filterSearch(loadedPosts, query)">
@@ -82,7 +72,7 @@ export default {
   methods: {
     filterSearch (loadedPosts, query) {
       return _.filter(loadedPosts, (post) => {
-        return post.title.toLowerCase().indexOf(this.query.toLowerCase()) > -1 || post.description.toLowerCase().indexOf(this.query.toLowerCase()) > -1
+        return post.title.toLowerCase().indexOf(this.query.toLowerCase()) > -1 || post.description.toLowerCase().indexOf(this.query.toLowerCase()) > -1 || post.creatorName.toLowerCase().indexOf(this.query.toLowerCase()) > -1 || post.creatorBusiness.toLowerCase().indexOf(this.query.toLowerCase()) > -1
       })
     },
     foundPost () {
@@ -108,18 +98,46 @@ export default {
 
 <style lang="scss" scoped>
 $app-color: #3498db;
+$bg-search: #f7f7f7;
+.__icon_search {
+  color: rgba(0,0,0,.54);
+  transition: color .2s;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+.search__bar {
+  background: $bg-search;
+  width: 100%;
+  padding: 8px 16px;
+  border-radius: 2px;
+  transition: background .1s ease-in;
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.05);
+  input {
+    width: 100%;
+    padding-left: 8px;
+    background: none;
+    color: rgba(0,0,0,.54);
+    border: none;
+    outline: none;
+  }
+  &:hover {
+    background: #EEE;
+  }
+}
 .__full {
   display: flex;
   flex-flow: row wrap;
 }
-.input_searchbar {
-  flex-grow: 2;
-  // box-shadow: 0 10px 40px 0 rgba(62, 57, 107, 0.07), 0 2px 9px 0 rgba(62, 57, 107, 0.06);
-  background: #f6f6f6;
-}
-input.form-control:focus{
-  border: 2px solid $app-color;
-}
+// .input_searchbar {
+//   flex-grow: 2;
+//   // box-shadow: 0 10px 40px 0 rgba(62, 57, 107, 0.07), 0 2px 9px 0 rgba(62, 57, 107, 0.06);
+//   background: #f6f6f6;
+// }
+// input.form-control:focus{
+//   border: 2px solid $app-color;
+// }
 
 .__home {
   margin-bottom: 200px;

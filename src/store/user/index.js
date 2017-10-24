@@ -81,54 +81,6 @@ export default {
           commit('SET_ERROR', error)
         })
     },
-    userUpdateProfile ({commit, getters}, payload) {
-      commit('SET_LOADING', true)
-      commit('CLEAR_ERROR')
-      const user = getters.user
-      const userProfile = {}
-      if (payload.lastname) {
-        userProfile.lastname = payload.lastname
-      }
-      if (payload.firstname) {
-        userProfile.firstname = payload.firstname
-      }
-      if (payload.phoneNumber) {
-        userProfile.phoneNumber = payload.phoneNumber
-      }
-      if (payload.gender) {
-        userProfile.gender = payload.gender
-      }
-      firebase.database().ref('users').child(user.id).update(userProfile)
-        .then(() => {
-          commit('SET_LOADING', false)
-          commit('SET_USER', userProfile)
-        })
-        .catch(error => {
-          commit('SET_LOADING', false)
-        })
-    },
-    fetchUserProfile: ({commit, getters}) => {
-      const user = getters.user
-      firebase.database().ref(`/users/${user.id}`).once('value')
-        .then(snap => {
-          const data = snap.val()
-          let user = {
-            id: snap.key,
-            registeredWish: [],
-            fbKeys: {},
-            email: data.email,
-            avatar: data.avatar,
-            firstname: data.firstname,
-            lastname: data.lastname,
-            phoneNumber: data.phoneNumber,
-            business: data.business,
-            timestamp: data.timestamp,
-            isDeleted: data.isDeleted,
-            gender: data.gender
-          }
-          commit('SET_USER', user)
-        })
-    },
     fetchUserMessages: ({commit, getters}) => {
       commit('SET_LOADING', true)
       const user = getters.user
@@ -212,6 +164,77 @@ export default {
             commit('SET_LOADING', false)
             commit('SET_ERROR', error)
           })
+    },
+    updateUserProfile ({commit, getters}, payload) {
+      commit('SET_LOADING', true)
+      commit('CLEAR_ERROR')
+      const user = getters.user
+      const userProfile = {}
+      if (payload.lastname) {
+        userProfile.lastname = payload.lastname
+      }
+      if (payload.firstname) {
+        userProfile.firstname = payload.firstname
+      }
+      if (payload.phoneNumber) {
+        userProfile.phoneNumber = payload.phoneNumber
+      }
+      if (payload.gender) {
+        userProfile.gender = payload.gender
+      }
+      if (payload.business) {
+        userProfile.business = payload.business
+      }
+
+      let imageUrl
+      firebase.database().ref('/users').child(user.id).update(userProfile)
+      .then(() => {
+        const filename = payload.image.name
+        const ext = filename.slice(filename.lastIndexOf('.'))
+        return firebase.storage().ref(`users/${user.id}.${ext}`).put(payload.image) // to be alter
+      })
+      .then(fileData => {
+        imageUrl = fileData.metadata.downloadURLs[0]
+        return firebase.database().ref('/users').child(user.id).update({avatar: imageUrl})
+      })
+      .then(() => {
+        commit('SET_USER', {
+          ...userProfile,
+          id: user.id,
+          registeredWish: user.registeredWish,
+          fbKeys: user.fbKeys,
+          email: user.email,
+          timestamp: user.timestamp,
+          isDeleted: user.isDeleted,
+          avatar: imageUrl
+        })
+        commit('SET_LOADING', false)
+      })
+      .catch(error => {
+        commit('SET_LOADING', false)
+      })
+    },
+    fetchUserProfile: ({commit, getters}) => {
+      const user = getters.user
+      firebase.database().ref(`/users/${user.id}`).once('value')
+        .then(snap => {
+          const data = snap.val()
+          let user = {
+            id: snap.key,
+            registeredWish: [],
+            fbKeys: {},
+            email: data.email,
+            avatar: data.avatar ? data.avatar : 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png',
+            firstname: data.firstname,
+            lastname: data.lastname,
+            phoneNumber: data.phoneNumber,
+            business: data.business,
+            timestamp: data.timestamp,
+            isDeleted: data.isDeleted,
+            gender: data.gender
+          }
+          commit('SET_USER', user)
+        })
     },
     signUserUp ({commit}, payload) {
       commit('SET_LOADING', true)

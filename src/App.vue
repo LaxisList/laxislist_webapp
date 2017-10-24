@@ -25,7 +25,7 @@ export default {
 </script>
 
 <style lang="scss">
-$app-color: #3498db;
+$app-color: #2980b9;
 
 html, body {
   box-sizing: border-box;
@@ -51,9 +51,12 @@ a {
 .__text {
   color: $app-color;
 }
-.btn__normal, .btn__more, .btn__login, btn {
+.btn__normal, .btn__more, .btn__login, {
   background: #333;
   color: white;
+  cursor: pointer;
+}
+button {
   cursor: pointer;
 }
 .form-control {
