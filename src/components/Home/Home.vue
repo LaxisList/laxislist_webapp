@@ -34,7 +34,7 @@
       </div>
       <div class="col-sm-12 col-md-9" v-else>
         <div class="row">
-          <div class="col-sm-6 col-md-4 mb-4" v-for="post in filterSearch(loadedPosts, query)">
+          <div class="col-sm-6 col-md-6 col-lg-4 mb-4" v-for="post in filterSearch(loadedPosts, query)">
             <app-post-card :post="post" :key="post.id"/>
           </div>
         </div>

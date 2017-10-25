@@ -18,15 +18,17 @@
             <span class="mr-1">Posté :</span> <b>{{post.timestamp | date}}</b>
           </div>
           <div class="__description mb-3">
-            <h5 class="
-            mb-2">Description :</h5>
+            <h6 class="
+            mb-2">Description :</h6>
             <p>{{post.description}}</p>
           </div>
           <div class="__host d-flex flex-column mb-4 mt-4">
+            <h6 class="
+            mb-3">Contacter le vendeur ou l'hôte :</h6>
             <div class="d-flex align-items-center">
               <img :src="post.creatorAvatar" alt="" class="avatar mr-3" v-if="post.creatorAvatar">
               <!-- <div v-if="post.creatorBusiness"><b>Hôte: {{post.creatorBusiness}}</b></div> -->
-              <div><b>Hôte: {{post.creatorName}}</b></div>
+              <div><b>{{post.creatorName}}</b></div>
             </div>
             <div class="d-flex flex-row mt-3">
               <button class="btn btn__normal mr-3" @click="callCreator = !callCreator">{{ callCreator !== true ? 'Voir numéro' : post.creatorPhoneNumber}}</button>
@@ -37,7 +39,7 @@
         <hr>
 
         <div class="mt-3 mb-5" v-if="post.details">
-          <h5 class="mb-2">Détails :</h5>
+          <h6 class="mb-2">Détails :</h6>
           <p>{{post.details}}</p>
         </div>
       </div>

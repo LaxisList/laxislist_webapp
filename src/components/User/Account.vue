@@ -3,8 +3,8 @@
     <div class="row d-flex justify-content-center">
       <div class="col-sm-10 col-md-9">
         <div class="d-flex flex-row justify-content-between align-items-center mb-3">
-          <h5 style="font-weight: 300;"><b>Mes informations personnelles</b></h5>
-          <router-link tag="button" :to="`/user/edit/${user.id}`" class="btn btn__normal">Modifier</router-link>
+          <h5 style="font-weight: 300;"><b>Mon compte</b></h5>
+          <router-link tag="button" :to="`/user/edit/${user.id}`" class="btn btn__normal" style="font-size: 14px;">Modifier</router-link>
         </div>
         <ul class="list-group">
           <li class="list-group-item">

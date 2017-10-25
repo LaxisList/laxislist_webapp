@@ -117,7 +117,7 @@ export default new Router({
     {
       path: '/terms-and-conditions',
       component: Terms,
-      meta: { title: 'Les conditions d\'utlisation' }
+      meta: { title: 'Les conditions d\'utilisation' }
     },
     {
       path: '*',

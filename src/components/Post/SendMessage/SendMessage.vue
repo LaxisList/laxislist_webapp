@@ -1,7 +1,6 @@
 <template lang="html">
   <div class="">
-    <button type="button" class="btn btn__message ml-2"  v-if="!userIsAuthenticated">Connectez-vous pour écrire à l'hôte</button>
-    <button type="button" class="btn btn__message ml-2" @click="sendMessage" v-else>Ecrire à l'hôte</button>
+    <button type="button" class="btn btn__message ml-2" @click="sendMessage" v-if="userIsAuthenticated">Écrire un message</button>
     <div class="modal sendMessageModal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
